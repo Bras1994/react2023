@@ -8,9 +8,18 @@ import { WinnerModal,checkEndGame } from './components/WinnerModal.jsx'
 
 
 function App() {
-  const [board, setBoard] = useState(Array(9).fill(null))
+  const [board, setBoard] = useState(()=>{
+    const boardFromStorage=  window.localStorage.getItem('board')
+    return boardFromStorage ? JSON.parse(boardFromStorage) : //valor inicial del estado
+    Array(9).fill(null) //valor por defecto
+  })
 
-  const[turn, setTurn]=useState(TURNS.x)
+  const[turn, setTurn]=useState(()=>{
+    const turnFromStorage = window.localStorage.getItem('turn')
+    return turnFromStorage ?? TURNS.x
+  }
+    
+    )
 
   const [winner, setWinner] = useState(null)
 
@@ -32,6 +41,10 @@ function App() {
     setBoard(Array(9).fill(null))
     setTurn(TURNS.x)
     setWinner(null)
+
+    //reset de local storage
+    window.localStorage.removeItem('board')
+    window.localStorage.removeItem('turn')
   }
 
  
@@ -46,6 +59,11 @@ function App() {
     const newTurn = turn === TURNS.x ? TURNS.o : TURNS.x
     setTurn(newTurn)
 
+    //Guardar partida
+    window.localStorage.setItem('board', JSON.stringify(newBoard))
+    window.localStorage.setItem('turn', newTurn)
+
+    //Revisar si hay ganador
     const newWinner = checkWinner(newBoard)
     if (newWinner) {
       confetti()
