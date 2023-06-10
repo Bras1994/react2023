@@ -13,7 +13,23 @@ main{
     font-family: system-ui
 }
 
+p{
+    margin: 10px;
+    padding: 5px;
+}
 .img_cat{
     max-width: 320 px;
-    height: auto;
+    height: 50vh;
+}
+
+.btn_change{
+    margin: 10px;
+    border-radius: .8px;
+    background-color: aliceblue;
+    padding: 5px 10px;
+}
+
+.btn_change:hover {
+    background-color: #686868;
+    color: aliceblue;
 }
