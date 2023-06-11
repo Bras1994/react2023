@@ -1,26 +1,32 @@
-//import withResult from '../mocks/with-results.json'
-
-export function ListOfMovies ({movies}) {
-    return(
-        <ul>
-            {
-                movie.map(map => (
-                    <li key={movie.imdbID}>
-                        <h3>{movie.Title}</h3>
-                        <p>{movie.Year}</p>
-                        <img src={movie.Poster} alt={movie.Title} />
-                    </li>
-                ))
-            }
-        </ul>
+function ListOfMovies ({ movies }) {
+    return (
+      <ul>
+        {
+          movies.map(movie => (
+            <li key={movie.id}>
+              <h3>{movie.title}</h3>
+              <p>{movie.year}</p>
+              <img src={movie.poster} alt={movie.title} />
+            </li>
+          ))
+        }
+      </ul>
     )
+  }
 
-}
-
-export function NoMvieResult(){
+  function NoMoviesResults() {
     return(
-        <p>
-            No se encontraron películas para esa búsqueda.
-        </p>
+      <p>No sé encontraron resultados para tu búsqueda.</p>
     )
-}
+  }
+
+  export function Movies ({movies}) {
+    //Cuando mostramos peliculas?
+    const hasMovies = movies?.length > 0
+    
+    return(
+        hasMovies
+            ? <ListOfMovies movies={movies} />
+            : <NoMoviesResults />
+    )
+  }

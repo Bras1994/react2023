@@ -1,6 +1,9 @@
 import './App.css'
+import { Movies } from './components/Movies'
+import { useMovies } from './hooks/useMovies'
 
 function App() {
+  const {movies : mappedMovies} = useMovies()
   return(
     <>
       <header className='buscador'>
@@ -12,9 +15,9 @@ function App() {
       </header>
 
       <main className='resultado'>
-        Aquí irán los resultados
+        <Movies movies={mappedMovies}/>
       </main>
-
+ 
     </>
   )
 }
